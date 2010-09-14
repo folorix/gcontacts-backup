@@ -31,16 +31,18 @@ public class App {
         System.setProperty("https.proxyHost", host);
         System.setProperty("https.proxyPort", port);
     }
+    private static final Logger trace = Logger.getLogger(App.class.getCanonicalName());
 
     public static void main(String[] args) {
         try {
             CommandLineParser parser = new PosixParser();
             CommandLine cmd = parser.parse(getOptions(), args);
             if (cmd.hasOption("ph") && cmd.hasOption("pp")) {
-                initProxy(cmd.getOptionValue("pp"), cmd.getOptionValue("ph"));
+                trace.info("Initializing proxy configuration ...");
+                initProxy(cmd.getOptionValue("ph"), cmd.getOptionValue("pp"));
             }
             ContactManager manager = new ContactManager();
-            manager.backup(new User("alexandre.touret@gmail.com", "figa,#rO!"), "d:/test");
+            manager.backup(new User(cmd.getOptionValue("u"), cmd.getOptionValue("p")), cmd.getOptionValue("d"));
         } catch (GContactException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {

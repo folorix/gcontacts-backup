@@ -49,7 +49,7 @@ public class ContactManager {
             URL feedUrl = new URL(FEED_URL);
             Query query = new Query(feedUrl);
             //todo a mettre en parametre du main
-            query.setMaxResults(500);
+            query.setMaxResults(1000);
             ContactFeed resultFeed = service.query(query, ContactFeed.class);
             ContactWrapper wrapper = new ContactWrapper();
             int i = 0;
