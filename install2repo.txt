@@ -1,0 +1,235 @@
+D:\java\libs\gdata\java\lib>mvn install:install-file -DartifactId=gdata-contacts -DgroupId=com.googl
+e.gdata -Dversion=3.0 -DgeneratePom=true -Dpackaging=jar  -Dfile=gdata-contacts-3.0.jar
+[INFO] Scanning for projects...
+[WARNING]
+        Profile with id: 'repository' has not been activated.
+
+[INFO] Searching repository for plugin with prefix: 'install'.
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Maven Default Project
+[INFO]    task-segment: [install:install-file] (aggregator-style)
+[INFO] ------------------------------------------------------------------------
+[INFO] [install:install-file {execution: default-cli}]
+[INFO] Installing D:\java\libs\gdata\java\lib\gdata-contacts-3.0.jar to d:\distribution\repository\c
+om\google\gdata\gdata-contacts\3.0\gdata-contacts-3.0.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1 second
+[INFO] Finished at: Mon Sep 13 14:52:07 CEST 2010
+[INFO] Final Memory: 3M/6M
+[INFO] ------------------------------------------------------------------------
+D:\java\libs\gdata\java\lib>mvn install:install-file -DartifactId=gdata-contacts-meta -DgroupId=com.
+google.gdata -Dversion=3.0 -DgeneratePom=true -Dpackaging=jar  -Dfile=gdata-contacts-meta-3.0.jar
+[INFO] Scanning for projects...
+[WARNING]
+        Profile with id: 'repository' has not been activated.
+
+[INFO] Searching repository for plugin with prefix: 'install'.
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Maven Default Project
+[INFO]    task-segment: [install:install-file] (aggregator-style)
+[INFO] ------------------------------------------------------------------------
+[INFO] [install:install-file {execution: default-cli}]
+[INFO] Installing D:\java\libs\gdata\java\lib\gdata-contacts-meta-3.0.jar to d:\distribution\reposit
+ory\com\google\gdata\gdata-contacts-meta\3.0\gdata-contacts-meta-3.0.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1 second
+[INFO] Finished at: Mon Sep 13 14:52:26 CEST 2010
+[INFO] Final Memory: 3M/6M
+[INFO] ------------------------------------------------------------------------
+D:\java\libs\gdata\java\lib>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
