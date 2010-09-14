@@ -14,6 +14,12 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <scm>
+        <connection>scm:hg:https://gcontacts-backup.googlecode.com/hg/gcontacts-backup</connection>
+        <developerConnection>scm:hg:https://gcontacts-backup.googlecode.com/hg/gcontacts-backup</developerConnection>
+        <tag>HEAD</tag>
+        <url>http://code.google.com/p/gcontacts-backup/source/browse/</url>
+    </scm>
 
     <dependencies>
         <dependency>
@@ -96,6 +102,10 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <mainClass>info.touret.gcontacts.App</mainClass>
+                            <!--
+                            <classpathLayoutType>custom</classpathLayoutType>
+                            <customClasspathLayout>lib/$${artifact.artifactId}-$${artifact.version}$${dashClassifier?}.$${artifact.extension}</customClasspathLayout>
+                            -->
                         </manifest>
                     </archive>
                 </configuration>

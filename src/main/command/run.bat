@@ -1,2 +1,3 @@
 @echo off
-java -jar ${project.build.finalName}.jar -classpath=lib/* %*
+set classpath=lib/*
+java info.touret.gcontacts.App %*

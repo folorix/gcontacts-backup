@@ -1,3 +1,3 @@
 #!/bin/sh
-
-java -jar ${project.build.finalName}.jar  -classpath=lib/* $@
+export CLASSPATH=lib/*
+java -jar ${project.build.finalName}.jar java info.touret.gcontacts.App $@
