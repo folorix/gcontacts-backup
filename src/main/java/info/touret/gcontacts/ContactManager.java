@@ -26,8 +26,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 /**
- *
- * @author touret-a
+ * Manager of extraction and serialization of the contacts
+ * @author $Author$
+ * @version $Revision$  / $Name$
  */
 public class ContactManager {
 
@@ -68,6 +69,12 @@ public class ContactManager {
         return contacts;
     }
 
+    /**
+     * Extract and store all the contacts of the user on the file specified on parameters
+     * @param user
+     * @param output
+     * @throws GContactException
+     */
     public void backup(User user, String output) throws GContactException {
         try {
             trace.info("Starting backup of user :" + user + " into directory " + output);
