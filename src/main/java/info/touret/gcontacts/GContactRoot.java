@@ -11,22 +11,33 @@ import javax.xml.bind.annotation.XmlAccessorOrder;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author touret-a
+ * Root element of the XML document
+ * @author $Author$
+ * @version $Revision$  / $Name$
  */
-
 @XmlRootElement
 public class GContactRoot {
 private List<Contact> contacts;
 
-    public List<Contact> getContacts() {
+/**
+ *
+ * @return all the contacts
+ */
+public List<Contact> getContacts() {
         return contacts;
     }
 
+    /**
+     *
+     * @param contacts
+     */
     public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
     }
 
+    /**
+     * 
+     */
     public GContactRoot() {
     }
 }

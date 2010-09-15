@@ -5,8 +5,9 @@
 package info.touret.gcontacts;
 
 /**
- *
- * @author touret-a
+ * Standard Exception
+ * @author $Author$
+ * @version $Revision$  / $Name$
  */
 public class GContactException extends Exception {
 
