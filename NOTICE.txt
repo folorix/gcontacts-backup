@@ -1,44 +1,52 @@
-D:\java\libs\gdata\java\lib>mvn install:install-file -DartifactId=gdata-contacts -DgroupId=com.googl
-e.gdata -Dversion=3.0 -DgeneratePom=true -Dpackaging=jar  -Dfile=gdata-contacts-3.0.jar
-[INFO] Scanning for projects...
-[WARNING]
-        Profile with id: 'repository' has not been activated.
+=====================================
+#How to build the source from scratch
+=====================================
 
-[INFO] Searching repository for plugin with prefix: 'install'.
-[INFO] ------------------------------------------------------------------------
-[INFO] Building Maven Default Project
-[INFO]    task-segment: [install:install-file] (aggregator-style)
-[INFO] ------------------------------------------------------------------------
-[INFO] [install:install-file {execution: default-cli}]
-[INFO] Installing D:\java\libs\gdata\java\lib\gdata-contacts-3.0.jar to d:\distribution\repository\c
-om\google\gdata\gdata-contacts\3.0\gdata-contacts-3.0.jar
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESSFUL
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 1 second
-[INFO] Finished at: Mon Sep 13 14:52:07 CEST 2010
-[INFO] Final Memory: 3M/6M
-[INFO] ------------------------------------------------------------------------
-D:\java\libs\gdata\java\lib>mvn install:install-file -DartifactId=gdata-contacts-meta -DgroupId=com.
-google.gdata -Dversion=3.0 -DgeneratePom=true -Dpackaging=jar  -Dfile=gdata-contacts-meta-3.0.jar
-[INFO] Scanning for projects...
-[WARNING]
-        Profile with id: 'repository' has not been activated.
+Introduction
 
-[INFO] Searching repository for plugin with prefix: 'install'.
-[INFO] ------------------------------------------------------------------------
-[INFO] Building Maven Default Project
-[INFO]    task-segment: [install:install-file] (aggregator-style)
-[INFO] ------------------------------------------------------------------------
-[INFO] [install:install-file {execution: default-cli}]
-[INFO] Installing D:\java\libs\gdata\java\lib\gdata-contacts-meta-3.0.jar to d:\distribution\reposit
-ory\com\google\gdata\gdata-contacts-meta\3.0\gdata-contacts-meta-3.0.jar
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESSFUL
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 1 second
-[INFO] Finished at: Mon Sep 13 14:52:26 CEST 2010
-[INFO] Final Memory: 3M/6M
-[INFO] ------------------------------------------------------------------------
-D:\java\libs\gdata\java\lib>
+How to checkout and build this project from scratch
 
+==Prerequisites==
+-------
+- JDK -
+-------
+At least JDK6
+
+---------
+Mercurial
+---------
+
+Google code uses mercurial.
+
+-----
+Maven
+-----
+
+I use maven in order to build and assembly the bundle. You could download and install this tool from the website http://maven.apache.org
+
+This project uses the google gdata libraries. Unfortunately, there are no google's maven repo. So you have to install manually those libraries
+
+$ mvn install:install-file -DartifactId=gdata-contacts -DgroupId=com.google.gdata -Dversion=3.0 -DgeneratePom=true -Dpackaging=jar  -Dfile=gdata-contacts-3.0.jar
+
+$ mvn install:install-file -DartifactId=gdata-contacts-meta -DgroupId=com.google.gdata -Dversion=3.0 -DgeneratePom=true -Dpackaging=jar  -Dfile=gdata-contacts-meta-3.0.jar
+
+ $ mvn install:install-file -DgeneratePom=true -DgroupId=com.google.gdata -DartifactId=gdata-core -Dpackaging=jar -Dfile=gdata-core-1.0.jar -Dversion=1.0
+
+$ mvn install:install-file -DgeneratePom=true -DgroupId=com.google.gdata -DartifactId=gdata-client -Dpackaging=jar -Dfile=gdata-client-1.0.jar -Dversion=1.0
+
+=====
+Build
+=====
+
+Clone the repository
+
+$hg clone https://gcontacts-backup.googlecode.com/hg/ gcontacts-backup  
+
+Build the artifact
+
+$ cd gcontacts-backup 
+$ mvn clean install
+
+Create the bundle
+
+$ mvn assembly:assembly
