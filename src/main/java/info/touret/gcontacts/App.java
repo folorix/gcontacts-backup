@@ -33,7 +33,8 @@ public class App {
             _options.addOption("pp", true, "Proxy Port");
             _options.addOption("u", true, "User Login (REQUIRED)");
             _options.addOption("p", true, "User Password (REQUIRED)");
-            _options.addOption("d", true, "Directory Output (REQUIRED)");
+            _options.addOption("d", true, "Directory Output (REQUIRED FOR EXTRACT)");
+            _options.addOption("i", true, "Input File for restore (REQUIRED FOR RESTORE)");
             _options.addOption("h", false, "Help message");
             setOptions(_options);
         }
@@ -64,7 +65,6 @@ public class App {
      * @param args
      */
     public static void main(String[] args) {
-
         try {
             CommandLineParser parser = new PosixParser();
             CommandLine cmd = parser.parse(getOptions(), args);
@@ -75,11 +75,22 @@ public class App {
                     trace.info("Initializing proxy configuration ...");
                     initProxy(cmd.getOptionValue("ph"), cmd.getOptionValue("pp"));
                 }
-                if(!cmd.hasOption("u")||!cmd.hasOption("p")||!cmd.hasOption("d")){
+                if (!cmd.hasOption("u") || !cmd.hasOption("p")) {
                     throw new ParseException("These Arguments Are required : user,password et destination");
                 }
                 ContactManager manager = new ContactManager();
-                manager.backup(new User(cmd.getOptionValue("u"), cmd.getOptionValue("p")), cmd.getOptionValue("d"));
+                // cas de l export
+                if (cmd.hasOption("d")) {
+                    manager.backup(new User(cmd.getOptionValue("u"), cmd.getOptionValue("p")), cmd.getOptionValue("d"));
+                } else {
+                    // cas de l import
+                    if (cmd.hasOption("i")) {
+                        manager.restore(new User(cmd.getOptionValue("u"), cmd.getOptionValue("p")), cmd.getOptionValue("i"));
+                    } else {
+                        throw new ParseException(
+                                "These Arguments Are required : user,password ( destination OR input) ");
+                    }
+                }
             }
         } catch (GContactException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);

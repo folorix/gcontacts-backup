@@ -10,20 +10,25 @@ import com.google.gdata.data.contacts.ContactEntry;
 import com.google.gdata.data.contacts.ContactFeed;
 import com.google.gdata.util.AuthenticationException;
 import com.google.gdata.util.ServiceException;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 /**
  * Manager of extraction and serialization of the contacts
@@ -96,5 +101,44 @@ public class ContactManager {
             throw new GContactException(ex);
         }
 
+    }
+
+    /**
+     * Restore all the entries founded in the file specified by the input parameter in the calendar of the user
+     * @param user
+     * @param input the absolute path
+     * @throws GContactException
+     */
+    public void restore(User user, String input) throws GContactException {
+        trace.info("Starting restore of user :" + user + " from file" + input);
+        try {
+            trace.info("Extracting contacts from file : " + input + " ...");
+            JAXBContext context = JAXBContext.newInstance(GContactRoot.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            GContactRoot contactsRoot = (GContactRoot) unmarshaller.unmarshal(new File(input));
+            trace.info("Extracting contacts from file : " + input + " done.");
+
+            ContactsService service = logon(user);
+            ContactWrapper wrapper = new ContactWrapper();
+            if (contactsRoot != null && contactsRoot.getContacts() != null) {
+                for (Contact current : contactsRoot.getContacts()) {
+                    // Ask the service to insert the new entry
+                    URL postUrl = new URL(FEED_URL);
+                    wrapper.setContact(current);
+                    trace.info("Inserting user : " + current.toString());
+                    service.insert(postUrl, wrapper.getEntry());
+                }
+            }
+            trace.info("Insertion done :)");
+        } catch (IOException ex) {
+            Logger.getLogger(ContactManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new GContactException(ex);
+        } catch (ServiceException ex) {
+            Logger.getLogger(ContactManager.class.getName()).log(Level.SEVERE, "Erreur lors de l' insertion des donnees dans Google Contacts", ex);
+            throw new GContactException(ex);
+        } catch (JAXBException ex) {
+            Logger.getLogger(ContactManager.class.getName()).log(Level.SEVERE, "Erreur lors de la recuperation des donnees provenant du fichier XML " + input, ex);
+            throw new GContactException(ex);
+        }
     }
 }

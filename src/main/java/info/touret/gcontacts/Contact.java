@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package info.touret.gcontacts;
 
 import java.util.List;
@@ -16,6 +15,7 @@ import javax.xml.bind.annotation.XmlAccessorOrder;
  */
 @XmlAccessorOrder(XmlAccessOrder.ALPHABETICAL)
 public class Contact {
+
     private List<String> emails;
     private List<String> phoneNumbers;
     private String fullname;
@@ -86,5 +86,8 @@ public class Contact {
     public Contact() {
     }
 
-    
+    @Override
+    public String toString() {
+        return "Contact{" + "emails=" + emails + "phoneNumbers=" + phoneNumbers + "fullname=" + fullname + '}';
+    }
 }
