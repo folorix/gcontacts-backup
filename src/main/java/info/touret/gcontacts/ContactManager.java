@@ -55,14 +55,17 @@ public class ContactManager {
             URL feedUrl = new URL(FEED_URL);
             Query query = new Query(feedUrl);
             //todo a mettre en parametre du main
-            query.setMaxResults(1000);
+            query.setMaxResults(500);
             ContactFeed resultFeed = service.query(query, ContactFeed.class);
             ContactWrapper wrapper = new ContactWrapper();
             int i = 0;
             for (ContactEntry current : resultFeed.getEntries()) {
+
                 trace.info("Retreiving contact #" + (i++) + "...");
                 wrapper.setEntry(current);
-                contacts.add(wrapper.getContact());
+                Contact contact = wrapper.getContact();
+                contacts.add(contact);
+                trace.info("Contact : "+contact.toString());
             }
         } catch (AuthenticationException e) {
             throw new GContactException(e);

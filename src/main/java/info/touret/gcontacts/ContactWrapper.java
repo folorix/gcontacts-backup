@@ -11,6 +11,7 @@ import com.google.gdata.data.extensions.Name;
 import com.google.gdata.data.extensions.PhoneNumber;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Wrap the contact entities returned by google to a custom class
@@ -78,7 +79,7 @@ public class ContactWrapper {
     public void setEntry(ContactEntry _entry) {
         this.entry = _entry;
     }
-
+    private static final Logger trace = Logger.getLogger(ContactWrapper.class.getCanonicalName());
     /**
      * Transform the contact entry. If the full name is blank, the string '(Without Name)' is initialized
      * @return the contact pojo regarding to the entry initialized by the method setEntry or the constructor
@@ -87,14 +88,14 @@ public class ContactWrapper {
     public Contact getContact() {
         if (this.entry != null) {// on est dans la transformation entry -> contact
             contact = new Contact();
-            List<String> emails = new ArrayList<String>(getEntry().getEmailAddresses().size());
+            List<String> emails = new ArrayList<String>(this.entry.getEmailAddresses().size());
             // extract emails
-            for (Email currentEmail : getEntry().getEmailAddresses()) {
+            for (Email currentEmail : this.entry.getEmailAddresses()) {
                 emails.add(currentEmail.getAddress());
             }
             // extract phone numbers
-            List<String> phoneNumbers = new ArrayList<String>(getEntry().getPhoneNumbers().size());
-            for (PhoneNumber currentPhoneNumber : getEntry().getPhoneNumbers()) {
+            List<String> phoneNumbers = new ArrayList<String>(this.entry.getPhoneNumbers().size());
+            for (PhoneNumber currentPhoneNumber : this.entry.getPhoneNumbers()) {
                 phoneNumbers.add(currentPhoneNumber.getPhoneNumber());
             }
             contact.setEmails(emails);
@@ -102,10 +103,10 @@ public class ContactWrapper {
             // extract full name
             if (getEntry().getName() == null) {
                 contact.setFullname("(Without Name)");
-            } else if (getEntry().getName().hasFullName()) {
-                contact.setFullname(getEntry().getName().getFullName().getValue());
+            } else if (this.entry.getName().hasFullName()) {
+                contact.setFullname(this.entry.getName().getFullName().getValue());
             } else {
-                contact.setFullname(getEntry().getName().toString());
+                contact.setFullname(this.entry.getName().toString());
             }
         }
         return contact;
