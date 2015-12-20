@@ -1,0 +1,55 @@
+#How to build the source from scratch
+
+# Introduction #
+How to checkout and build this project from scratch
+
+# Details #
+
+## Prerequisites ##
+
+### JDK ###
+At least JDK6
+
+### A google account ###
+....
+
+### Mercurial ###
+Google code uses mercurial.
+### Maven ###
+I use maven in order to build and assembly the bundle.
+You could download and install this tool from the website http://maven.apache.org
+
+
+This project uses the google gdata libraries. Unfortunately, there are no google's maven repo. So you have to install manually those libraries
+
+```
+$ mvn install:install-file -DartifactId=gdata-contacts -DgroupId=com.google.gdata -Dversion=3.0 -DgeneratePom=true -Dpackaging=jar  -Dfile=gdata-contacts-3.0.jar
+
+$ mvn install:install-file -DartifactId=gdata-contacts-meta -DgroupId=com.google.gdata -Dversion=3.0 -DgeneratePom=true -Dpackaging=jar  -Dfile=gdata-contacts-meta-3.0.jar
+
+ $ mvn install:install-file -DgeneratePom=true -DgroupId=com.google.gdata -DartifactId=gdata-core -Dpackaging=jar -Dfile=gdata-core-1.0.jar -Dversion=1.0
+
+$ mvn install:install-file -DgeneratePom=true -DgroupId=com.google.gdata -DartifactId=gdata-client -Dpackaging=jar -Dfile=gdata-client-1.0.jar -Dversion=1.0
+```
+
+
+## Build ##
+
+## Clone the repository ##
+
+```
+$hg clone https://gcontacts-backup.googlecode.com/hg/ gcontacts-backup  
+```
+
+## Build the artifact ##
+
+```
+$ cd gcontacts-backup 
+$ mvn clean install
+```
+
+## Create the bundle ##
+
+```
+$ mvn assembly:assembly
+```
